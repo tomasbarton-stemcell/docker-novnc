@@ -1,20 +1,17 @@
 FROM debian:buster
 
-# Install git, supervisor, VNC, & X11 packages
 RUN set -ex; \
     apt-get update; \
     apt-get install -y \
-      bash \
       fluxbox \
-      git \
-      net-tools \
       novnc \
       supervisor \
       tigervnc-common \
       tigervnc-standalone-server \
       xterm
 
-# Setup demo environment variables
+RUN ln -s /usr/share/novnc/vnc_lite.html /usr/share/novnc/index.html
+
 ENV HOME=/root \
     DEBIAN_FRONTEND=noninteractive \
     LANG=en_US.UTF-8 \
@@ -22,9 +19,8 @@ ENV HOME=/root \
     LC_ALL=C.UTF-8 \
     DISPLAY=:0.0 \
     DISPLAY_WIDTH=1024 \
-    DISPLAY_HEIGHT=768 \
-    RUN_XTERM=yes \
-    RUN_FLUXBOX=yes
-COPY . /app
-CMD ["/app/entrypoint.sh"]
+    DISPLAY_HEIGHT=768
+
+COPY . /vnc
+CMD ["/vnc/entrypoint.sh"]
 EXPOSE 8080
