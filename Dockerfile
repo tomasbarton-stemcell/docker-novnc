@@ -10,9 +10,9 @@ RUN set -ex; \
       net-tools \
       novnc \
       supervisor \
-      x11vnc \
-      xterm \
-      xvfb
+      tigervnc-common \
+      tigervnc-standalone-server \
+      xterm
 
 # Setup demo environment variables
 ENV HOME=/root \
