@@ -13,7 +13,8 @@ RUN set -ex; \
       supervisor \
       tigervnc-common \
       tigervnc-standalone-server \
-      xterm
+      xterm \
+      expect
 
 RUN ln -s /usr/share/novnc/vnc_lite.html /usr/share/novnc/index.html
 
@@ -23,5 +24,5 @@ ENV HOME=/root \
     DISPLAY_HEIGHT=768
 
 COPY . /vnc
-CMD ["/vnc/entrypoint.sh"]
+ENTRYPOINT ["/vnc/entrypoint.tcl"]
 EXPOSE 8080
