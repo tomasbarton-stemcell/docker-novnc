@@ -5,8 +5,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
     LANGUAGE=en_US.UTF-8 \
     LC_ALL=C.UTF-8
 
-RUN set -ex; \
-    apt-get update; \
+RUN set -ex && \
+    apt-get update && \
     apt-get install -y \
       fluxbox \
       novnc \
@@ -14,7 +14,8 @@ RUN set -ex; \
       tigervnc-common \
       tigervnc-standalone-server \
       xterm \
-      expect
+      expect &&\
+    rm -rf /var/lib/apt/lists/*
 
 RUN ln -s /usr/share/novnc/vnc_lite.html /usr/share/novnc/index.html
 
